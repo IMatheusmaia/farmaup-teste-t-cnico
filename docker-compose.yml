@@ -5,8 +5,8 @@ services:
     container_name: "${LOCALSTACK_DOCKER_NAME:-localstack-main}"
     image: localstack/localstack:4.12.0
     ports:
-      - "127.0.0.1:4566:4566" # LocalStack Gateway
-      - "127.0.0.1:4510-4559:4510-4559" # external services port range
+      - "127.0.0.1:4566:4566"
+      - "127.0.0.1:4510-4559:4510-4559"
     environment:
       - ACTIVATE_PRO=0
       - DEBUG=0
@@ -16,11 +16,17 @@ services:
       - AWS_SECRET_ACCESS_KEY=test
       - AWS_DEFAULT_REGION=us-east-1
       - LOCALSTACK_AUTH_TOKEN=ls-JIRu0752-liKa-paYA-2551-dexIxEKA028e
-
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "./localstack/scripts/resources.sh:/etc/localstack/init/ready.d/resources.sh"
     entrypoint: /bin/sh -c "chmod +x /etc/localstack/init/ready.d/resources.sh && docker-entrypoint.sh"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:4566/_localstack/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
   api:
     networks:
       - localstack
@@ -38,10 +44,12 @@ services:
       - AWS_ROLE_ARN=arn:aws:iam::000000000000:role/appRole
       - AWS_ENDPOINT=http://localstack:4566
     depends_on:
-      - localstack
+      localstack:
+        condition: service_healthy # Espera o health check passar
     volumes:
       - ./api/src:/app/src
       - ./api/package.json:/app/package.json
+
 networks:
   localstack:
     driver: bridge
