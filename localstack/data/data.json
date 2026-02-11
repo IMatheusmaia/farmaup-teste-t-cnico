@@ -1,0 +1,214 @@
+{
+    "Usuarios": [
+        {
+            "PutRequest": {
+                "Item": {
+                    "id": {
+                        "S": "1029384756"
+                    },
+                    "nome": {
+                        "S": "Carlos Silva"
+                    },
+                    "email": {
+                        "S": "carlos.silva1029@example.com"
+                    },
+                    "telefone": {
+                        "S": "11987654321"
+                    },
+                    "cidade": {
+                        "S": "São Paulo"
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "id": {
+                        "S": "5647382910"
+                    },
+                    "nome": {
+                        "S": "Mariana Costa"
+                    },
+                    "email": {
+                        "S": "mariana.costa5647@example.com"
+                    },
+                    "telefone": {
+                        "S": "21976543210"
+                    },
+                    "cidade": {
+                        "S": "Rio de Janeiro"
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "id": {
+                        "S": "8473625149"
+                    },
+                    "nome": {
+                        "S": "Lucas Pereira"
+                    },
+                    "email": {
+                        "S": "lucas.pereira8473@example.com"
+                    },
+                    "telefone": {
+                        "S": "31965432109"
+                    },
+                    "cidade": {
+                        "S": "Belo Horizonte"
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "id": {
+                        "S": "9182736450"
+                    },
+                    "nome": {
+                        "S": "Ana Souza"
+                    },
+                    "email": {
+                        "S": "ana.souza9182@example.com"
+                    },
+                    "telefone": {
+                        "S": "41954321098"
+                    },
+                    "cidade": {
+                        "S": "Curitiba"
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "id": {
+                        "S": "7362519480"
+                    },
+                    "nome": {
+                        "S": "Pedro Lima"
+                    },
+                    "email": {
+                        "S": "pedro.lima7362@example.com"
+                    },
+                    "telefone": {
+                        "S": "51943210987"
+                    },
+                    "cidade": {
+                        "S": "Porto Alegre"
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "id": {
+                        "S": "6251498372"
+                    },
+                    "nome": {
+                        "S": "Juliana Alves"
+                    },
+                    "email": {
+                        "S": "juliana.alves6251@example.com"
+                    },
+                    "telefone": {
+                        "S": "61932109876"
+                    },
+                    "cidade": {
+                        "S": "Brasília"
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "id": {
+                        "S": "5149837261"
+                    },
+                    "nome": {
+                        "S": "Rafael Martins"
+                    },
+                    "email": {
+                        "S": "rafael.martins5149@example.com"
+                    },
+                    "telefone": {
+                        "S": "71921098765"
+                    },
+                    "cidade": {
+                        "S": "Salvador"
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "id": {
+                        "S": "4038271615"
+                    },
+                    "nome": {
+                        "S": "Fernanda Rocha"
+                    },
+                    "email": {
+                        "S": "fernanda.rocha4038@example.com"
+                    },
+                    "telefone": {
+                        "S": "81910987654"
+                    },
+                    "cidade": {
+                        "S": "Recife"
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "id": {
+                        "S": "3927161504"
+                    },
+                    "nome": {
+                        "S": "Gustavo Nunes"
+                    },
+                    "email": {
+                        "S": "gustavo.nunes3927@example.com"
+                    },
+                    "telefone": {
+                        "S": "91909876543"
+                    },
+                    "cidade": {
+                        "S": "Belém"
+                    }
+                }
+            }
+        },
+        {
+            "PutRequest": {
+                "Item": {
+                    "id": {
+                        "S": "2816054937"
+                    },
+                    "nome": {
+                        "S": "Larissa Melo"
+                    },
+                    "email": {
+                        "S": "larissa.melo2816@example.com"
+                    },
+                    "telefone": {
+                        "S": "11988776655"
+                    },
+                    "cidade": {
+                        "S": "Campinas"
+                    }
+                }
+            }
+        }
+    ]
+}
