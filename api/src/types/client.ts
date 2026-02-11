@@ -16,4 +16,11 @@ type ClientType = {
     city: string;
 };
 
-export type { ZodClientType, ClientType };
+type CreateClientType = {
+    name: string;
+    email: string;
+    phone: string;
+    city: string;
+}
+
+export type { ZodClientType, ClientType, CreateClientType };

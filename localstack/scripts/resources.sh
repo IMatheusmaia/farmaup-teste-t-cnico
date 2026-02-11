@@ -53,3 +53,5 @@ echo "anexando política de acesso total do DynamoDB para tabela clientes à rol
 awslocal iam attach-role-policy \
   --role-name appRole \
   --policy-arn arn:aws:iam::$AWS_ACCOUNT_ID:policy/AppFullAcessPolicy
+
+
