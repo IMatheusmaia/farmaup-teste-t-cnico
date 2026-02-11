@@ -1,6 +1,6 @@
 import type { ZodString } from "zod";
 
-type ClientType = {
+type ZodClientType = {
     id?: ZodString;
     name: ZodString;
     email: ZodString;
@@ -8,4 +8,12 @@ type ClientType = {
     city: ZodString;
 };
 
-export type { ClientType };
+type ClientType = {
+    id?: string;
+    name: string;
+    email: string;
+    phone: string;
+    city: string;
+};
+
+export type { ZodClientType, ClientType };

@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx src/index.ts",
     "build": "tsc -p tsconfig.json",
-    "start": "npm run build && node dist/index.js"
+    "start": "node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,11 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.987.0",
+    "@aws-sdk/client-sts": "^3.987.0",
+    "@aws-sdk/util-dynamodb": "^3.988.0",
+    "crypto-random-string": "^5.0.0",
+    "dotenv": "^17.2.4",
     "fastify": "^5.7.4",
     "fastify-type-provider-zod": "^6.1.0",
     "zod": "^4.3.6"
