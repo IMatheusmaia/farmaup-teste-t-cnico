@@ -10,12 +10,10 @@ const clientSchema = z.object({
 }) as ZodObject<ClientType>;
 
 export const createClientValidation = {
-    schema: {
-        body: clientSchema,
-        response: {
-            201: z.object({
-                message: z.string(),
-            })
-        }
+    body: clientSchema,
+    response: {
+        201: z.object({
+            message: z.string(),
+        })
     }
 } as FastifySchema;

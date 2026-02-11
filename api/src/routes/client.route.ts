@@ -11,7 +11,12 @@ export async function clientRoutes(fastify: FastifyInstance) {
     //     return { hello: 'world' }
     // });
 
-    fastify.post('/clientes', { schema: createClientValidation }, createClientController);
+    fastify.route({
+        method: 'POST',
+        url: '/clientes',
+        handler: createClientController,
+        schema: createClientValidation
+    })
 
     // fastify.put('/clientes/:id', async (request, reply) => {
     //     return { hello: 'world' }
