@@ -1,14 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { UserList } from "../components/UserList";
-import { getClients, type Client } from "../services/api";
-
-let initialClients: Client[] = [];
-try {
-	initialClients = await getClients();
-} catch (error) {
-	console.error("Failed to fetch clients server-side", error);
-}
 ---
 
-<Layout> <UserList client:load initialClients={initialClients} /> </Layout>
+<Layout>
+	<UserList client:load />
+</Layout>

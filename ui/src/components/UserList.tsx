@@ -3,39 +3,41 @@ import { Plus } from 'lucide-react';
 import { UserCard } from './UserCard';
 import { UserForm } from './UserForm';
 import { Modal } from './Modal';
-import { getClients, createClient, updateClient, deleteClient, type Client, type CreateClientInput, type UpdateClientInput } from '../services/api';
+import {
+    type Client,
+    type CreateClientInput,
+    type UpdateClientInput,
+    getClients,
+    deleteClient,
+    updateClient,
+    createClient
+} from '../services/api';
 
-interface UserListProps {
-    initialClients?: Client[];
-}
 
-export function UserList({ initialClients }: UserListProps) {
-    const [clients, setClients] = useState<Client[]>(initialClients || []);
+export function UserList() {
+    const [clients, setClients] = useState<Client[]>([]);
+    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingClient, setEditingClient] = useState<Client | undefined>(undefined);
-    const [loading, setLoading] = useState(!initialClients);
     const [submitLoading, setSubmitLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
 
-    const fetchClients = async () => {
+    const loadClients = async () => {
         try {
             setLoading(true);
+            setError(null);
             const data = await getClients();
             setClients(data);
-            setError(null);
-        } catch (err) {
+        } catch (_err) {
             setError('Erro ao carregar clientes. Verifique se a API está rodando.');
-            console.error(err);
         } finally {
             setLoading(false);
         }
     };
 
     useEffect(() => {
-        if (!initialClients) {
-            fetchClients();
-        }
-    }, [initialClients]);
+        loadClients();
+    }, []);
 
     const handleCreate = () => {
         setEditingClient(undefined);
@@ -48,13 +50,12 @@ export function UserList({ initialClients }: UserListProps) {
     };
 
     const handleDelete = async (id: string) => {
-        if (confirm('Tem certeza que deseja excluir este cliente?')) {
+        if (confirm('Deseja excluir este cliente?')) {
             try {
                 await deleteClient(id);
-                fetchClients();
+                await loadClients(); // Refresh the list
             } catch (err) {
                 alert('Erro ao excluir cliente');
-                console.error(err);
             }
         }
     };
@@ -68,7 +69,7 @@ export function UserList({ initialClients }: UserListProps) {
                 await createClient(data as CreateClientInput);
             }
             setIsModalOpen(false);
-            fetchClients();
+            await loadClients(); // Refresh the list
         } catch (err) {
             alert('Erro ao salvar cliente');
             console.error(err);
@@ -135,4 +136,4 @@ export function UserList({ initialClients }: UserListProps) {
             </Modal>
         </div>
     );
-}
+};
