@@ -10,7 +10,7 @@ const fastify = Fastify({
 });
 
 await fastify.register(cors, {
-    origin: ['http://localhost:4322'],
+    origin: ['http://localhost:4322', 'http://localhost:8080'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true
