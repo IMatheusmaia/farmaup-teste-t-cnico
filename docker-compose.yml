@@ -50,6 +50,20 @@ services:
       - ./api/src:/app/src
       - ./api/package.json:/app/package.json
 
+  front:
+    networks:
+      - localstack
+    container_name: "front"
+    environment:
+      - PUBLIC_API_URL=http://api:3030
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+
 networks:
   localstack:
     driver: bridge

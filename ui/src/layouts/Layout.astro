@@ -1,0 +1,25 @@
+---
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Farmaup Client Manager</title>
+	</head>
+	<body class="bg-gray-50 text-gray-900 antialiased">
+		<slot />
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>
