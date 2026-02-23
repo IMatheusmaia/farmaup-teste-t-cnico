@@ -54,8 +54,6 @@ services:
     networks:
       - localstack
     container_name: "front"
-    environment:
-      - PUBLIC_API_URL=http://api:3030
     build:
       context: ./ui
       dockerfile: Dockerfile
@@ -63,6 +61,26 @@ services:
       - "8080:80"
     depends_on:
       - api
+  
+  ngrok:
+    image: ngrok/ngrok:alpine
+    container_name: ngrok_tunnel
+    depends_on:
+      - front
+    restart: unless-stopped
+    environment:
+      NGROK_AUTHTOKEN: '34qaauGvXP7Omtd8OUtOGESCioS_5b5ucycKKKmD31zr5TtBY'
+    command:
+      - "start"
+      - "--all"
+      - "--config"
+      - "/etc/ngrok.yml"
+    volumes:
+      - ./ngrok.yml:/etc/ngrok.yml
+    ports:
+      - "4040:4040"
+    networks:
+      - localstack
 
 networks:
   localstack:
