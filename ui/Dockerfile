@@ -10,6 +10,8 @@ RUN npm ci
 # Copiar o restante do projeto
 COPY . .
 
+ENV PUBLIC_API_URL=/api
+
 # Fazer o build do projeto Astro
 RUN npm run build
 
@@ -18,6 +20,7 @@ FROM nginx:alpine
 
 # Copiar os arquivos da pasta dist para o nginx
 COPY --from=builder /app/dist /usr/share/nginx/html
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expor a porta 80
 EXPOSE 80

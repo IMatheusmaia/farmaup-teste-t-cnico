@@ -9,7 +9,6 @@ if (!credential.accessKeyId || !credential.secretAccessKey) {
 
 const dynamoDbClient = new DynamoDBClient({
     region: process.env.AWS_REGION,
-    endpoint: process.env.AWS_ENDPOINT,
     credentials: { ...credential }
 } as any);
 

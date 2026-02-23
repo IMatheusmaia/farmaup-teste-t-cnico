@@ -9,7 +9,7 @@ services:
       - "127.0.0.1:4510-4559:4510-4559"
     environment:
       - ACTIVATE_PRO=0
-      - DEBUG=0
+      - DEBUG=1
       - AWS_REGION=us-east-1
       - AWS_ACCOUNT_ID=000000000000
       - AWS_ACCESS_KEY_ID=test
@@ -19,50 +19,40 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "./localstack/scripts/resources.sh:/etc/localstack/init/ready.d/resources.sh"
-    entrypoint: /bin/sh -c "chmod +x /etc/localstack/init/ready.d/resources.sh && docker-entrypoint.sh"
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:4566/_localstack/health" ]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 30s
-
-  api:
-    networks:
-      - localstack
-    container_name: "api"
-    build:
-      context: ./api
-      dockerfile: Dockerfile
-    ports:
-      - "3030:3030"
-    environment:
-      - AWS_REGION=us-east-1
-      - AWS_ACCESS_KEY_ID=test
-      - AWS_SECRET_ACCESS_KEY=test
-      - DYNAMODB_TABLE_NAME=clientes
-      - AWS_ROLE_ARN=arn:aws:iam::000000000000:role/appRole
-      - AWS_ENDPOINT=http://localstack:4566
-    depends_on:
-      localstack:
-        condition: service_healthy # Espera o health check passar
-    volumes:
-      - ./api/src:/app/src
-      - ./api/package.json:/app/package.json
+      - ./lambda/resource/package/app.zip:/lambda/app/app.zip:ro
+      - ./lambda/resource/properties/cors-config.json:/lambda/app/cors-config.json:ro
+    entrypoint: /bin/sh -c "chmod +x /etc/localstack/init/ready.d/resources.sh && docker-entrypoint.sh"  
 
   front:
     networks:
       - localstack
     container_name: "front"
-    environment:
-      - PUBLIC_API_URL=http://api:3030
     build:
       context: ./ui
       dockerfile: Dockerfile
     ports:
       - "8080:80"
     depends_on:
-      - api
+      - localstack
+  ngrok:
+    image: ngrok/ngrok:alpine
+    container_name: ngrok_tunnel
+    depends_on:
+      - front
+    restart: unless-stopped
+    environment:
+      NGROK_AUTHTOKEN: '34qaauGvXP7Omtd8OUtOGESCioS_5b5ucycKKKmD31zr5TtBY'
+    command:
+      - "start"
+      - "--all"
+      - "--config"
+      - "/etc/ngrok.yml"
+    volumes:
+      - ./ngrok.yml:/etc/ngrok.yml
+    ports:
+      - "4040:4040"
+    networks:
+      - localstack
 
 networks:
   localstack:

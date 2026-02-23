@@ -1,6 +1,6 @@
 import { STSClient, AssumeRoleCommand } from "@aws-sdk/client-sts";
 
-const clientSts = new STSClient({ region: process.env.AWS_REGION, endpoint: process.env.AWS_ENDPOINT });
+const clientSts = new STSClient({ region: process.env.AWS_REGION });
 
 export const assumeRole = async (): Promise<{
     accessKeyId: string | undefined;

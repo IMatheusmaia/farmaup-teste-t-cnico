@@ -10,7 +10,7 @@ import { updateClientValidation } from "../schemas/validation/updateClientValida
 import { deleteClientController } from "../controller/deleteClient.controller.js";
 import { deleteClientValidation } from "../schemas/validation/deleteClientValidation.js";
 
-export async function clientRoutes(fastify: FastifyInstance) {
+export async function bootstrap(fastify: FastifyInstance) {
     fastify.get('/clientes', { schema: getAllClientsValidation }, getAllClientsController);
 
     fastify.get('/clientes/:id', { schema: getClientByIdValidation }, getClientByIdController);
@@ -20,4 +20,6 @@ export async function clientRoutes(fastify: FastifyInstance) {
     fastify.put('/clientes/:id', { schema: updateClientValidation }, updateClientController);
 
     fastify.delete('/clientes/:id', { schema: deleteClientValidation }, deleteClientController);
+
+    return fastify;
 }

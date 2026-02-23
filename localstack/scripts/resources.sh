@@ -54,4 +54,20 @@ awslocal iam attach-role-policy \
   --role-name appRole \
   --policy-arn arn:aws:iam::$AWS_ACCOUNT_ID:policy/AppFullAcessPolicy
 
+echo "Criando Lambda function-url (all cross-origin)..."
+awslocal lambda create-function \
+    --function-name app \
+    --runtime nodejs24.x \
+    --zip-file fileb:///lambda/app/app.zip \
+    --handler  build/lambda.handler \
+    --role arn:aws:iam::$AWS_ACCOUNT_ID:role/appRole \
+    --region us-east-1 \
+    --timeout 30 \
+    --environment 'Variables={AWS_CREDENTIALS_STS_ROLE_ARN=arn:aws:iam::'"$AWS_ACCOUNT_ID"':role/appRole, DYNAMODB_TABLE_NAME=clientes, AWS_REGION='"$AWS_REGION"' }'\
+    --tags '{"_custom_id_":"app"}' \
+
+awslocal lambda create-function-url-config \
+    --function-name app \
+    --auth-type NONE \
+    --cors file:///lambda/app/cors-config.json \
 
