@@ -1,9 +1,9 @@
 import { GetItemCommand, type AttributeValue } from "@aws-sdk/client-dynamodb";
-import { dynamoDbClient } from "../config/aws/client/dynamoDbClient.js";
+import { dynamoDBClient } from "../config/aws/client/dynamoDbClient";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
-import type { ClientType } from "../types/client.js";
 
 export async function getClientById(clientId: string) {
+    const clientDb = await dynamoDBClient();
     const command = new GetItemCommand({
         TableName: process.env.DYNAMODB_TABLE_NAME,
         Key: {
@@ -12,7 +12,7 @@ export async function getClientById(clientId: string) {
     });
 
     try {
-        const data = await dynamoDbClient.send(command);
+        const data = await clientDb.send(command);
         return unmarshall(data.Item as Record<string, AttributeValue>);
 
     } catch (err) {

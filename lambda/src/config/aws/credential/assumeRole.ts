@@ -1,15 +1,13 @@
 import { STSClient, AssumeRoleCommand } from "@aws-sdk/client-sts";
 
-const clientSts = new STSClient({ region: process.env.AWS_REGION });
+const REGION = process.env.AWS_REGION;
 
-export const assumeRole = async (): Promise<{
-    accessKeyId: string | undefined;
-    secretAccessKey: string | undefined;
-    sessionToken: string | undefined;
-}> => {
+const clientSts = new STSClient({ region: REGION });
+
+export const assumeRole = async () => {
     const command = new AssumeRoleCommand({
         RoleArn: process.env.AWS_ROLE_ARN,
-        RoleSessionName: "app-farmaup-api",
+        RoleSessionName: "app-session",
     });
 
     const response = await clientSts.send(command);
@@ -22,5 +20,5 @@ export const assumeRole = async (): Promise<{
         accessKeyId: response.Credentials.AccessKeyId,
         secretAccessKey: response.Credentials.SecretAccessKey,
         sessionToken: response.Credentials.SessionToken,
-    };
+    }
 };

@@ -1,12 +1,14 @@
 import { UpdateItemCommand, type AttributeValue } from "@aws-sdk/client-dynamodb";
-import { dynamoDbClient } from "../config/aws/client/dynamoDbClient.js";
+import { dynamoDBClient } from "../config/aws/client/dynamoDbClient";
 import { unmarshall } from "@aws-sdk/util-dynamodb";
-import type { ClientType } from "../types/client.js";
+import type { ClientType } from "../types/client";
 
 export async function updateClient(
     clientId: string,
     clientData: Partial<ClientType>
 ) {
+    const clientDb = await dynamoDBClient();
+
     const updateFields = Object.entries(clientData).filter(
         ([_, value]) => value !== undefined && value !== null
     );
@@ -47,7 +49,7 @@ export async function updateClient(
     });
 
     try {
-        const data = await dynamoDbClient.send(command);
+        const data = await clientDb.send(command);
 
         if (!data.Attributes) {
             throw new Error("Falha ao atualizar cliente");

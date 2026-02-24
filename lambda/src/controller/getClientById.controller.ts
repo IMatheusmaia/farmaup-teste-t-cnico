@@ -1,4 +1,4 @@
-import { getClientById } from "../service/getClientById.service.js";
+import { getClientById } from "../service/getClientById.service";
 import type { FastifyReply, FastifyRequest } from "fastify";
 
 export async function getClientByIdController(request: FastifyRequest, reply: FastifyReply) {

@@ -1,13 +1,11 @@
-import cryptoRandom from "crypto-random-string";
-import { getClientById } from "../service/getClientById.service.js";
+import { getClientById } from "../service/getClientById.service";
+import cryptoRandomString from "crypto-random-string";
 
-async function preventCollisionID() {
-    const id = cryptoRandom({ length: 10, type: 'numeric' });
+export async function preventCollisionID() {
+    const id = cryptoRandomString({ length: 10, type: 'numeric' });
     const client = await getClientById(id);
     if (client) {
         return preventCollisionID();
     }
     return id;
 };
-
-export { preventCollisionID };

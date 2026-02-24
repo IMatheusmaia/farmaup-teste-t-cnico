@@ -1,6 +1,6 @@
 # API de Clientes
 
-API REST para gerenciamento de clientes com Node.js e Fastify Framework.
+API REST Serverless para gerenciamento de clientes com Node.js e Fastify  + AWS Lambda Adapter.
 
 ## 📋 Pré-requisitos
 
@@ -14,13 +14,21 @@ API REST para gerenciamento de clientes com Node.js e Fastify Framework.
 git clone <url-do-repositorio>
 cd <nome-do-projeto>
 ```
+2. Entre no diretório da API Serverless e faça o empacotamento para .zip
 
-2. Build e inicie os containers:
+```bash
+
+cd lambda/
+npm run package #já tem um script preparado para empacotar a aplicação
+
+```
+
+3. Build e inicie os containers:
 ```bash
 docker compose up --build
 ```
 
-3. A API estará disponível em: `http://localhost:3030`
+3. A aplicação pode ser testada pela interface gráfica em: `http://localhost:8080`
 
 ## 📡 Endpoints
 
@@ -65,13 +73,6 @@ Content-Type: application/json
 ```http
 DELETE /clientes/:id
 ```
-
-## 🧪 Testando a API
-
-Utilize ferramentas como:
-- [Postman](https://www.postman.com/)
-- [Insomnia](https://insomnia.rest/)
-- [Thunder Client](https://www.thunderclient.com/) (extensão VS Code)
 
 ## 🛑 Parar a Aplicação
 

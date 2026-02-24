@@ -1,6 +1,6 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
-import { getClientById } from "../service/getClientById.service.js";
-import { deleteClient } from "../service/deleteClient.service.js";
+import { getClientById } from "../service/getClientById.service";
+import { deleteClient } from "../service/deleteClient.service";
 
 export async function deleteClientController(request: FastifyRequest, reply: FastifyReply) {
     const { id } = request.params as { id: string };

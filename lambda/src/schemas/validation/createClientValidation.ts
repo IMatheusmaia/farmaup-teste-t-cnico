@@ -1,6 +1,6 @@
 import { z, type ZodObject } from "zod";
 import type { FastifySchema } from "fastify";
-import type { ZodClientType } from "../../types/client.js";
+import type { ZodClientType } from "../../types/client";
 
 const clientSchema = z.object({
     name: z.string().min(3, 'O nome deve ter pelo menos 3 caracteres'),

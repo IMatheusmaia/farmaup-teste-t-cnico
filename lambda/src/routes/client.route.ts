@@ -1,16 +1,16 @@
 import type { FastifyInstance } from "fastify";
-import { createClientValidation } from "../schemas/validation/createClientValidation.js";
-import { createClientController } from "../controller/createClient.controller.js";
-import { getClientByIdController } from "../controller/getClientById.controller.js";
-import { getClientByIdValidation } from "../schemas/validation/getClientByIdValidation.js";
-import { getAllClientsController } from "../controller/getAllClients.controller.js";
-import { getAllClientsValidation } from "../schemas/validation/getAllClientsValidation.js";
-import { updateClientController } from "../controller/updateClient.controller.js";
-import { updateClientValidation } from "../schemas/validation/updateClientValidation.js";
-import { deleteClientController } from "../controller/deleteClient.controller.js";
-import { deleteClientValidation } from "../schemas/validation/deleteClientValidation.js";
+import { createClientValidation } from "../schemas/validation/createClientValidation";
+import { createClientController } from "../controller/createClient.controller";
+import { getClientByIdController } from "../controller/getClientById.controller";
+import { getClientByIdValidation } from "../schemas/validation/getClientByIdValidation";
+import { getAllClientsController } from "../controller/getAllClients.controller";
+import { getAllClientsValidation } from "../schemas/validation/getAllClientsValidation";
+import { updateClientController } from "../controller/updateClient.controller";
+import { updateClientValidation } from "../schemas/validation/updateClientValidation";
+import { deleteClientController } from "../controller/deleteClient.controller";
+import { deleteClientValidation } from "../schemas/validation/deleteClientValidation";
 
-export async function bootstrap(fastify: FastifyInstance) {
+export async function routes(fastify: FastifyInstance) {
     fastify.get('/clientes', { schema: getAllClientsValidation }, getAllClientsController);
 
     fastify.get('/clientes/:id', { schema: getClientByIdValidation }, getClientByIdController);

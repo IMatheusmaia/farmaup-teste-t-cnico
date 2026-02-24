@@ -1,7 +1,7 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
-import { updateClient } from "../service/updateClient.service.js";
-import { getClientById } from "../service/getClientById.service.js"
-import type { ClientType } from "../types/client.js";
+import { updateClient } from "../service/updateClient.service";
+import { getClientById } from "../service/getClientById.service"
+import type { ClientType } from "../types/client";
 
 export async function updateClientController(request: FastifyRequest, reply: FastifyReply) {
     try {

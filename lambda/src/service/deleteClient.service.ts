@@ -1,7 +1,8 @@
 import { DeleteItemCommand } from "@aws-sdk/client-dynamodb";
-import { dynamoDbClient } from "../config/aws/client/dynamoDbClient.js";
+import { dynamoDBClient } from "../config/aws/client/dynamoDbClient";
 
 export async function deleteClient(clientId: string) {
+    const clientDb = await dynamoDBClient();
     const command = new DeleteItemCommand({
         TableName: process.env.DYNAMODB_TABLE_NAME,
         Key: {
@@ -10,7 +11,7 @@ export async function deleteClient(clientId: string) {
     });
 
     try {
-        await dynamoDbClient.send(command);
+        clientDb.send(command);
     } catch (err) {
         console.error(err);
         throw new Error("Erro ao deletar cliente");

@@ -1,9 +1,0 @@
-version: 3
-
-agent:
-  authtoken: 34qaauGvXP7Omtd8OUtOGESCioS_5b5ucycKKKmD31zr5TtBY
-endpoints:
-  - name: lambda-app
-    url: https://ivan-unproclaimed-hosea.ngrok-free.dev
-    upstream:
-      url: http://front:80

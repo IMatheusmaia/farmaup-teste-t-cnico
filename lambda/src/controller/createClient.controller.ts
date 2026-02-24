@@ -1,6 +1,6 @@
 import type { FastifyReply, FastifyRequest } from "fastify";
-import { createClient } from "../service/createClient.service.js";
-import type { CreateClientType } from "../types/client.js";
+import { createClient } from "../service/createClient.service";
+import type { CreateClientType } from "../types/client";
 
 export async function createClientController(request: FastifyRequest, reply: FastifyReply) {
     const client = request.body as CreateClientType;

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prebuild": "rm -rf build",
-    "build": "npm run prebuild && tsc",
+    "build": "npm run prebuild && esbuild src/lambda.ts --bundle --platform=node --target=node20 --outfile=build/lambda.js --external:@aws-sdk/* --sourcemap",
     "zip": "zip -r app.zip ./build ./node_modules && mv app.zip ./resource/package",
     "package": "npm run build && npm run zip"
   },
@@ -24,7 +24,8 @@
   "homepage": "https://github.com/IMatheusmaia/farmaup-teste-t-cnico#readme",
   "devDependencies": {
     "@tsconfig/node20": "^20.1.9",
-    "@types/node": "^25.2.3",
+    "@types/node": "^25.3.0",
+    "esbuild": "^0.27.3",
     "typescript": "^5.9.3"
   },
   "dependencies": {
@@ -32,6 +33,7 @@
     "@aws-sdk/client-sts": "^3.987.0",
     "@aws-sdk/util-dynamodb": "^3.988.0",
     "@fastify/aws-lambda": "^6.4.0",
+    "@fastify/cors": "^11.2.0",
     "crypto-random-string": "^5.0.0",
     "fastify": "^5.7.4",
     "fastify-type-provider-zod": "^6.1.0",

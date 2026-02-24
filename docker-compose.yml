@@ -9,13 +9,14 @@ services:
       - "127.0.0.1:4510-4559:4510-4559"
     environment:
       - ACTIVATE_PRO=0
-      - DEBUG=1
+      - DEBUG=0
       - AWS_REGION=us-east-1
       - AWS_ACCOUNT_ID=000000000000
       - AWS_ACCESS_KEY_ID=test
       - AWS_SECRET_ACCESS_KEY=test
       - AWS_DEFAULT_REGION=us-east-1
       - LOCALSTACK_AUTH_TOKEN=ls-JIRu0752-liKa-paYA-2551-dexIxEKA028e
+      - EXTRA_CORS_ALLOWED_ORIGINS=http://localhost:8080
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
       - "./localstack/scripts/resources.sh:/etc/localstack/init/ready.d/resources.sh"
@@ -33,25 +34,6 @@ services:
     ports:
       - "8080:80"
     depends_on:
-      - localstack
-  ngrok:
-    image: ngrok/ngrok:alpine
-    container_name: ngrok_tunnel
-    depends_on:
-      - front
-    restart: unless-stopped
-    environment:
-      NGROK_AUTHTOKEN: '34qaauGvXP7Omtd8OUtOGESCioS_5b5ucycKKKmD31zr5TtBY'
-    command:
-      - "start"
-      - "--all"
-      - "--config"
-      - "/etc/ngrok.yml"
-    volumes:
-      - ./ngrok.yml:/etc/ngrok.yml
-    ports:
-      - "4040:4040"
-    networks:
       - localstack
 
 networks:
